@@ -17,7 +17,7 @@ const HouseContextProvider = ({ children }) => {
 
   // return all countries
   useEffect(() => {
-    const allCountries = houses.map((house) => {
+    const allCountries = housesData.map((house) => {
       return house.country;
     });
 
@@ -26,11 +26,11 @@ const HouseContextProvider = ({ children }) => {
 
     // set countries state
     setCountries(uniqueCountries);
-  }, [houses]);
+  }, []);
 
   // return all properties
   useEffect(() => {
-    const allProperties = houses.map((house) => {
+    const allProperties = housesData.map((house) => {
       return house.type;
     });
 
@@ -41,7 +41,7 @@ const HouseContextProvider = ({ children }) => {
 
     // set properties state
     setProperties(uniqueProperties);
-  }, [houses]);
+  }, []);
 
   const handleClick = () => {
     // set loading
