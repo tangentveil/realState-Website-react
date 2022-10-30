@@ -1,4 +1,3 @@
-import { type } from "@testing-library/user-event/dist/type";
 import React, { useState, useEffect, createContext } from "react";
 
 // import data
@@ -277,7 +276,7 @@ const HouseContextProvider = ({ children }) => {
       );
     }, 1000);
 
-    console.log(newHouses);
+    // console.log(newHouses);
   };
 
   return (

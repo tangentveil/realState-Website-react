@@ -1,7 +1,7 @@
 import React from "react";
 
 // import icons
-import { RiMapPinLine, RiArrowDownSLine, RiArrowUpSLine } from "react-icons/ri";
+import { RiArrowDownSLine, RiArrowUpSLine } from "react-icons/ri";
 
 // import link
 import { Link } from "react-router-dom";
