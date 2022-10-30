@@ -14,7 +14,6 @@ const HouseContextProvider = ({ children }) => {
   const [price, setPrice] = useState("Price range (any)");
   const [surface, setSurface] = useState("Surface (any)");
   const [loading, setLoading] = useState(false);
-
   // return all countries
   useEffect(() => {
     const allCountries = housesData.map((house) => {
