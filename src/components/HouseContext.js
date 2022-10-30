@@ -63,211 +63,37 @@ const HouseContextProvider = ({ children }) => {
 
     // console.log(minSurface, maxSurface);
 
-    const newHouses = housesData.filter((house) => {
-      const housePrice = parseInt(house.price);
-      const houseSurface = parseInt(house.surface.split(" ")[0]);
-
-      // console.log(houseSurface);
-
-      if (
-        house.country === country &&
-        house.type === property &&
-        housePrice >= minPrice &&
-        housePrice <= maxPrice &&
-        houseSurface >= minSurface &&
-        houseSurface <= maxSurface
-      ) {
-        return house;
-      }
-
-      if (
-        isDefault(country) &&
-        isDefault(property) &&
-        isDefault(price) &&
-        isDefault(surface)
-      ) {
-        return house;
-      }
-
-      if (
-        !isDefault(country) &&
-        isDefault(property) &&
-        isDefault(price) &&
-        isDefault(surface)
-      ) {
-        return house.country === country;
-      }
-
-      if (
-        isDefault(country) &&
-        !isDefault(property) &&
-        isDefault(price) &&
-        isDefault(surface)
-      ) {
-        return house.type === property;
-      }
-
-      if (
-        isDefault(country) &&
-        isDefault(property) &&
-        !isDefault(price) &&
-        isDefault(surface)
-      ) {
-        if (housePrice >= minPrice && housePrice <= maxPrice) {
-          return house;
-        }
-      }
-
-      if (
-        isDefault(country) &&
-        isDefault(property) &&
-        isDefault(price) &&
-        !isDefault(surface)
-      ) {
-        if (houseSurface >= minSurface && houseSurface <= maxSurface) {
-          return house;
-        }
-      }
-
-      if (
-        !isDefault(country) &&
-        !isDefault(property) &&
-        isDefault(price) &&
-        isDefault(surface)
-      ) {
-        return house.country === country && house.type === property;
-      }
-
-      if (
-        !isDefault(country) &&
-        isDefault(property) &&
-        !isDefault(price) &&
-        isDefault(surface)
-      ) {
-        if (housePrice >= minPrice && housePrice <= maxPrice) {
+    const newHouses = housesData
+      .filter((house) => {
+        if (!isDefault(country)) {
           return house.country === country;
+        } else {
+          return true;
         }
-      }
-
-      if (
-        !isDefault(country) &&
-        isDefault(property) &&
-        isDefault(price) &&
-        !isDefault(surface)
-      ) {
-        if (houseSurface >= minSurface && houseSurface <= maxSurface) {
-          return house.country === country;
-        }
-      }
-
-      if (
-        isDefault(country) &&
-        !isDefault(property) &&
-        !isDefault(price) &&
-        isDefault(surface)
-      ) {
-        if (housePrice >= minPrice && housePrice <= maxPrice) {
+      })
+      .filter((house) => {
+        if (!isDefault(property)) {
           return house.type === property;
+        } else {
+          return true;
         }
-      }
-
-      if (
-        isDefault(country) &&
-        !isDefault(property) &&
-        isDefault(price) &&
-        !isDefault(surface)
-      ) {
-        if (houseSurface >= minSurface && houseSurface <= maxSurface) {
-          return house.type === property;
+      })
+      .filter((house) => {
+        const housePrice = parseInt(house.price);
+        if (!isDefault(price)) {
+          return minPrice <= housePrice && housePrice <= maxPrice;
+        } else {
+          return true;
         }
-      }
-
-      if (
-        isDefault(country) &&
-        isDefault(property) &&
-        !isDefault(price) &&
-        !isDefault(surface)
-      ) {
-        if (
-          houseSurface >= minSurface &&
-          houseSurface <= maxSurface &&
-          housePrice >= minPrice &&
-          housePrice <= maxPrice
-        ) {
-          return house;
+      })
+      .filter((house) => {
+        const houseSurface = parseInt(house.surface.split(" ")[0]);
+        if (!isDefault(price)) {
+          return minSurface <= houseSurface && houseSurface <= maxSurface;
+        } else {
+          return true;
         }
-      }
-
-      if (
-        !isDefault(country) &&
-        !isDefault(property) &&
-        !isDefault(price) &&
-        isDefault(surface)
-      ) {
-        if (housePrice >= minPrice && housePrice <= maxPrice) {
-          return house.type === property && house.country === country;
-        }
-      }
-
-      if (
-        !isDefault(country) &&
-        !isDefault(property) &&
-        isDefault(price) &&
-        !isDefault(surface)
-      ) {
-        if (houseSurface >= minSurface && houseSurface <= maxSurface) {
-          return house.country === country && house.type === property;
-        }
-      }
-
-      if (
-        !isDefault(country) &&
-        isDefault(property) &&
-        !isDefault(price) &&
-        !isDefault(surface)
-      ) {
-        if (
-          houseSurface >= minSurface &&
-          houseSurface <= maxSurface &&
-          housePrice >= minPrice &&
-          housePrice <= maxPrice
-        ) {
-          return house.country === country;
-        }
-      }
-
-      if (
-        isDefault(country) &&
-        !isDefault(property) &&
-        !isDefault(price) &&
-        !isDefault(surface)
-      ) {
-        if (
-          houseSurface >= minSurface &&
-          houseSurface <= maxSurface &&
-          housePrice >= minPrice &&
-          housePrice <= maxPrice
-        ) {
-          return house.type === property;
-        }
-      }
-
-      if (
-        !isDefault(country) &&
-        !isDefault(property) &&
-        !isDefault(price) &&
-        !isDefault(surface)
-      ) {
-        if (
-          housePrice >= minPrice &&
-          housePrice <= maxPrice &&
-          houseSurface >= minSurface &&
-          houseSurface <= maxSurface
-        ) {
-          return house;
-        }
-      }
-    });
+      });
 
     setTimeout(() => {
       return (
@@ -295,7 +121,6 @@ const HouseContextProvider = ({ children }) => {
         houses,
         loading,
         handleClick,
-        loading,
       }}
     >
       {children}
